@@ -1,0 +1,4 @@
+"C:\Users\pietr\AppData\Local\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\pietr\OneDrive\Desktop\Programmi Visual Studio\Cluedo Project"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/cmake-build-debug

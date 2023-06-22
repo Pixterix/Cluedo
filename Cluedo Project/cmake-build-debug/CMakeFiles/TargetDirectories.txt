@@ -1,0 +1,3 @@
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/cmake-build-debug/CMakeFiles/Cluedo_Project.dir
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir

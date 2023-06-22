@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/Body.c
+Body.h
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/Body.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/Body.h
+stdio.h
+-
+stdlib.h
+-
+
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/main.c
+stdio.h
+-
+stdlib.h
+-
+Body.h
+C:/Users/pietr/OneDrive/Desktop/Programmi Visual Studio/Cluedo Project/Body.h
+
