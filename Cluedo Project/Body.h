@@ -54,6 +54,7 @@ list UpdateList(player_t *player, murder_t *murder, weapon_t *weapon, room_t *ro
                 const int *Tmp, int Player, list List);
 void UpdateCard(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution,
                 const int *Tmp, int Player);
+list Resolut(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution, list List);
 list RemoveNode(link c, link p, list List);
 
 #endif //CLUEDO_PROJECT_BODY_H
