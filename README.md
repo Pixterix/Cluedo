@@ -84,4 +84,4 @@ PROBLEMA:
    Fault, mentre il debugger (ma solo con la presenza di << setbuf(stdout,NULL); fflush(stdout); >>) compila
    correttamente e mi stampa tutto giusto (anche i nodi in lista). Al secondo inserimento in lista anche il debugger 
    inizia ad avere problemi a cui però non riesco a dare un senso (come in alcune free di elementi allocati un istante prima
-   oppure su elementi appena allocati e inizializzati).
+   oppure su elementi appena allocati e inizializzati, andando a creare problemi nel disassemby di cui non sono a conoscenza).
