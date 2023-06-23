@@ -17,13 +17,13 @@ int main() {
     //Resolut(player, murder, weapon, room, solution, List);
 
     PrintAllInfo(player, murder, weapon, room, solution, List);
-    /*
+    
     ListFree(List);
     free(player);
     free(murder);
     free(weapon);
     free(room);
     free(solution);
-    */
+    
     exit(EXIT_SUCCESS);
 }
