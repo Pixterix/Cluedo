@@ -63,14 +63,25 @@ DESCRIZIONE DEL PROGRAMMA E DELLE SUE FUNZIONI:
    << IndexByName >> restituisce un array di 2 elementi contenente il tipo e l'indice della carta/giocatore.
 
    La funzione << PrintAllInfo >> stampa tutte le informazioni riguardante tutto (giocatori, carte, request).
+   La funzione << Resolut >> (ancora non testata per via dei problemi precedenti) svolge il ruolo di pulizia della lista:
+   cerca i nodi in cui 2 delle 3 proposte non sono fattibili per assegnare la terza a quel giocatore, andando ad
+   aggiornare anche gli altri nodi. Il while piu esterno, (all'interno della funzione) fa ricominciare la lettura della 
+   lista finchè nessun nodo può essere eliminato oppure tutti i nodi sono stati rimossi. 
+
+   Alla fine di ciò implementerò una funzione ricorsiva che con il brute-force genererà ogni combinazione possibile di 
+   assegnazione, considerando tutte le informazioni ottenute. Ovviamente questa funzione sara necessaria con sole poche 
+   opzioni rimaste (per magari capire quali domande fare per escludere le ultime opzioni), poiche con non abbastanza 
+   informazioni, ne gernererebbe un numero eccessivo, inutile alla finalità del problema.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 PROBLEMA:
 
-    Il programma funziona bene se non devo aggiungere nodi in lista (quando negano dandomi la carta oppure se nessuno
-    può dire nulla).
+   Il programma funziona bene se non devo aggiungere nodi in lista (quando negano dandomi la carta oppure se nessuno
+   può dire nulla).
 
-    se aggiungo una Request con un "Yes" (negano ma non so cosa) e devo mettere un nodo, il compilatore da Segmentation
-    Fault, mentre il debugger (ma solo con la presenza di << setbuf(stdout,NULL); fflush(stdout); >>) compila
-    correttamente e mi stampa tutto giusto (anche i nodi in lista).
+   Se aggiungo una Request con un "Yes" (negano ma non so cosa) e devo mettere un nodo, il compilatore da Segmentation
+   Fault, mentre il debugger (ma solo con la presenza di << setbuf(stdout,NULL); fflush(stdout); >>) compila
+   correttamente e mi stampa tutto giusto (anche i nodi in lista). Al secondo inserimento in lista anche il debugger 
+   inizia ad avere problemi a cui però non riesco a dare un senso (come in alcune free di elementi allocati un istante prima
+   oppure su elementi appena allocati e inizializzati).
