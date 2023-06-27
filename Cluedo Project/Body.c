@@ -177,14 +177,14 @@ void PrintAllInfo(player_t *player, murder_t *murder, weapon_t *weapon, room_t *
 }
 
 list ListInit(){
-    list List = malloc(sizeof(list));
+    list List = malloc(sizeof(*List));
     List->head=NULL;
     return List;
 }
 
 list NewNode(int Pla, int Mur, int Wea, int Roo, list List, solution_t *solution){
-    link Node = malloc(sizeof(link));
-
+    link Node = malloc(sizeof(*Node));
+    
     Node->player=Pla;
 
     //se quella carta ce l'ha qualcun'altro, metto quella richiesta a impossibile
@@ -206,6 +206,7 @@ list NewNode(int Pla, int Mur, int Wea, int Roo, list List, solution_t *solution
 
     Node->Next=List->head;
     List->head=Node;
+    
     return List;
 }
 
@@ -288,7 +289,7 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
 
         //Caso in cui l'interessato non può negare aggiorno (Tranne se sono io a rispondere)
         if(Pla!=2){
-            int *c = malloc(2*sizeof(int));
+            int c[2];
             player[Pla+1].murders[Mur]=-1;
             c[0]=1; c[1]=Mur;
             List=UpdateList(player, murder, weapon, room, solution, c, Pla+1, List);
@@ -298,7 +299,6 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
             player[Pla+1].rooms[Roo]=-1;
             c[0]=3; c[1]=Roo;
             List=UpdateList(player, murder, weapon, room, solution, c, Pla+1, List);
-            free (c);
         }
 
         //devo rifare le stesse cose per la seconda risposta
@@ -392,20 +392,19 @@ void UpdateCard(player_t *player, murder_t *murder, weapon_t *weapon, room_t *ro
 //La uso per cercare nella lista tutte le richieste di un dato giocatore e mettere a -1 la carta non sua.
 list UpdateList(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution,
                 const int *Tmp, int Player, list List){
-
     //Vado a mettere -1 in tutte le request in cui compare una carta che so appartenga a un'altra persona.
     link c = List->head;
     while (c!=NULL){
-        if(c->player==Player){
-            switch(Tmp[0]){
+        if(c->player==Player) {
+            switch (Tmp[0]) {
                 case 1:
-                    c->Murder[Tmp[1]]=-1;
+                    c->Murder[Tmp[1]] = -1;
                     break;
                 case 2:
-                    c->Weapon[Tmp[1]]=-1;
+                    c->Weapon[Tmp[1]] = -1;
                     break;
                 case 3:
-                    c->Room[Tmp[1]]=-1;
+                    c->Room[Tmp[1]] = -1;
                     break;
                 default:
                     printf("Error in UpdateList\n");
