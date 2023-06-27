@@ -45,7 +45,7 @@ struct Node{
 
 void PrintAllInfo(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution, list List);
 void Body_Init(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution);
-int *Index_By_Name(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, char *Name);
+void Index_By_Name(int *Index, player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, char *Name);
 list ListInit();
 list NewNode(int Pla, int Mur, int Wea, int Roo, list List, solution_t *solution);
 void ListFree(list List);
@@ -54,7 +54,7 @@ list UpdateList(player_t *player, murder_t *murder, weapon_t *weapon, room_t *ro
                 const int *Tmp, int Player, list List);
 void UpdateCard(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution,
                 const int *Tmp, int Player);
-list Resolut(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution, list List);
 list RemoveNode(link c, link p, list List);
+list Resolut(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, solution_t *solution, list List);
 
 #endif //CLUEDO_PROJECT_BODY_H
