@@ -74,14 +74,3 @@ DESCRIZIONE DEL PROGRAMMA E DELLE SUE FUNZIONI:
    informazioni, ne gernererebbe un numero eccessivo, inutile alla finalità del problema.
 
 ---------------------------------------------------------------------------------------------------------------------------
-
-PROBLEMA:
-
-   Il programma funziona bene se non devo aggiungere nodi in lista (quando negano dandomi la carta oppure se nessuno
-   può dire nulla).
-
-   Se aggiungo una Request con un "Yes" (negano ma non so cosa) e devo mettere un nodo, il compilatore da Segmentation
-   Fault, mentre il debugger (ma solo con la presenza di << setbuf(stdout,NULL); fflush(stdout); >>) compila
-   correttamente e mi stampa tutto giusto (anche i nodi in lista). Al secondo inserimento in lista anche il debugger 
-   inizia ad avere problemi a cui però non riesco a dare un senso (come in alcune free di elementi allocati un istante prima
-   oppure su elementi appena allocati e inizializzati, andando a creare problemi nel disassemby di cui non sono a conoscenza).
