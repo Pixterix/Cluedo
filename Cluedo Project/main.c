@@ -11,6 +11,7 @@ int main() {
     weapon_t *weapon = malloc(6*sizeof(weapon_t));
     room_t *room = malloc(9*sizeof(room_t));
     solution_t *solution = malloc(sizeof(solution_t));
+    
     Body_Init(player, murder, weapon, room, solution);
     list List = RescueRequest(player, murder, weapon, room, solution);
 
