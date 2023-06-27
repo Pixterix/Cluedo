@@ -1,9 +1,8 @@
 Sha Vel Pis Bas Pra Cuc
 
-2
+4
 
 Pix    Fre Pis Cor    Fre
 Fra    Fre Pis Stu    Yes
-
-
-
+Gio    Sig Spa Cim    Not Yes
+Pix    Sco Pis Ver    Not Ver
