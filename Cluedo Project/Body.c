@@ -44,35 +44,34 @@ void Body_Init(player_t *player, murder_t *murder, weapon_t *weapon, room_t *roo
     fclose(fp);
 }
 
-int *Index_By_Name(player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, char *Name){
-    int *Index = malloc(2*sizeof(int));
+void Index_By_Name(int *Index, player_t *player, murder_t *murder, weapon_t *weapon, room_t *room, char *Name){
     if(player!=NULL)
         for(int i=0; i<3; i++)
             if(strcmp(Name, player[i].Name)==0){
                 Index[0]=0;
                 Index[1]=i;
-                return Index;
+                return;
             }
     if(murder!=NULL)
         for(int i=0; i<6; i++)
             if(strcmp(Name, murder[i].Name)==0){
                 Index[0]=1;
                 Index[1]=i;
-                return Index;
+                return;
             }
     if(weapon!=NULL)
         for(int i=0; i<6; i++)
             if(strcmp(Name, weapon[i].Name)==0) {
                 Index[0]=2;
                 Index[1]=i;
-                return Index;
+                return;
             }
     if(room!=NULL)
         for(int i=0; i<9; i++)
             if(strcmp(Name, room[i].Name)==0){
                 Index[0]=3;
                 Index[1]=i;
-                return Index;
+                return;
             }
     printf("%s not exist\n", Name);
     exit(EXIT_FAILURE);
@@ -184,7 +183,7 @@ list ListInit(){
 
 list NewNode(int Pla, int Mur, int Wea, int Roo, list List, solution_t *solution){
     link Node = malloc(sizeof(*Node));
-    
+
     Node->player=Pla;
 
     //se quella carta ce l'ha qualcun'altro, metto quella richiesta a impossibile
@@ -206,7 +205,7 @@ list NewNode(int Pla, int Mur, int Wea, int Roo, list List, solution_t *solution
 
     Node->Next=List->head;
     List->head=Node;
-    
+
     return List;
 }
 
@@ -229,13 +228,12 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
 
     //Tolgo le mie carte
     char tmp[4];
-    int *Ntmp;
+    int Ntmp[2];
     for(int i=0; i<6; i++){
         fscanf(fp, "%s", tmp);
-        Ntmp = Index_By_Name(NULL, murder, weapon, room, tmp);
+        Index_By_Name(Ntmp, NULL, murder, weapon, room, tmp);
         UpdateCard(player, murder, weapon, room, solution, Ntmp, 0);
     }
-    free(Ntmp);
 
     //Inizio a leggere le richieste
     int NRequest;
@@ -243,12 +241,10 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
     fscanf(fp, "%d", &NRequest);
     for(int i=0; i<NRequest; i++){
         char P[4], M[4], W[4], R[4], A[4], A2[4];
-        int *Ans, *clean=NULL;
-        int Pla, Mur, Wea, Roo;
+        int Ans[2], clean[2], Pla, Mur, Wea, Roo;
         fscanf(fp, "%s %s %s %s %s", P, M, W, R, A);
-        clean=Index_By_Name(player, NULL, NULL, NULL, P);    //Pla è colui che fa richiesta
+        Index_By_Name(clean, player, NULL, NULL, NULL, P);    //Pla è colui che fa richiesta
         Pla=clean[1];
-        free(clean);
 
         //se il primo non può negare si passa al secondo
         if(strcmp(A, "Not")==0)
@@ -258,26 +254,22 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
         if(strcmp(A, "Not")!=0 && strcmp(A, "Yes")!=0 && Pla==2)
             continue;
 
-        clean=Index_By_Name(NULL, murder, NULL, NULL, M);
+        Index_By_Name(clean, NULL, murder, NULL, NULL, M);
         Mur=clean[1];
-        free(clean);
-        clean=Index_By_Name(NULL, NULL, weapon, NULL, W);
+        Index_By_Name(clean, NULL, NULL, weapon, NULL, W);
         Wea=clean[1];
-        free(clean);
-        clean=Index_By_Name(NULL, NULL, NULL, room, R);
+        Index_By_Name(clean, NULL, NULL, NULL, room, R);
         Roo=clean[1];
-        free(clean);
 
         //Caso in cui so l'indizio
         if(strcmp(A, "Not")!=0 && strcmp(A, "Yes")!=0){
 
             //Se negano dandomi la carta o se la "intercetto" con abilità
-            Ans=Index_By_Name(NULL, murder, weapon, room, A);
+            Index_By_Name(Ans, NULL, murder, weapon, room, A);
             UpdateCard(player, murder, weapon, room, solution, Ans, Pla+1);
             for(int j=0; j<3; j++)
                 if((Pla+1)!=j)
                     List=UpdateList(player, murder, weapon, room, solution, Ans, j, List);
-            free(Ans);
             continue;
         }
 
@@ -315,12 +307,11 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
         if(strcmp(A2, "Not")!=0 && strcmp(A2, "Yes")!=0){
 
             //Se negano dandomi la carta oppure intercetto
-            Ans=Index_By_Name(NULL, murder, weapon, room, A2);
+            Index_By_Name(Ans, NULL, murder, weapon, room, A2);
             UpdateCard(player, murder, weapon, room, solution, Ans, mem);
             for(int j=0; j<3; j++)
                 if(mem!=j)
                     List=UpdateList(player, murder, weapon, room, solution, Ans, j, List);
-            free(Ans);
             continue;
         }
 
@@ -332,7 +323,7 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
 
         //Caso in cui l'interessato non può negare (Tranne se sono io a rispondere)
         if(Pla!=1){
-            int *c = malloc(2*sizeof(int));
+            int c[2];
             player[mem].murders[Mur]=-1;
             c[0]=1; c[1]=Mur;
             List=UpdateList(player, murder, weapon, room, solution, c, mem, List);
@@ -342,7 +333,6 @@ list RescueRequest(player_t *player, murder_t *murder, weapon_t *weapon, room_t 
             player[mem].rooms[Roo]=-1;
             c[0]=3; c[1]=Roo;
             List=UpdateList(player, murder, weapon, room, solution, c, mem, List);
-            free (c);
         }
     }
     fclose(fp);
@@ -470,5 +460,6 @@ list RemoveNode(link c, link p, list List){
     else
         p->Next=c->Next;
     free(c);
+
     return List;
 }
